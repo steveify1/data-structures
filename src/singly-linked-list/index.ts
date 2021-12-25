@@ -67,6 +67,23 @@ export default class SinglyLinkedList {
         this.decrementLength();
         return currentNode.value;
     }
+
+    /**
+     * Removes the first node in a linked list and returns the value of the node.
+     */
+     shift() {
+        if (!this.length) return null;
+        const valueOfRemovedNode = this.head.value;
+
+        if (this.length === 1) {
+            this.head = this.tail = null;
+        } else {
+            this.head = this.head.next;
+        }
+
+        this.decrementLength();
+        return valueOfRemovedNode;
+    }
 }
 
 
@@ -81,11 +98,24 @@ singlyLinkedList.push('Earth');
 
 console.log(singlyLinkedList);
 
-singlyLinkedList.pop();
+singlyLinkedList.shift();
 console.log(singlyLinkedList);
-singlyLinkedList.pop();
+
+
+singlyLinkedList.shift();
 console.log(singlyLinkedList);
-singlyLinkedList.pop();
+
+singlyLinkedList.shift();
 console.log(singlyLinkedList);
-singlyLinkedList.pop();
+
+singlyLinkedList.shift();
+console.log(singlyLinkedList);
+
+singlyLinkedList.shift();
+console.log(singlyLinkedList);
+
+singlyLinkedList.push('Super');
+singlyLinkedList.push('Planet');
+console.log(singlyLinkedList);
+singlyLinkedList.shift();
 console.log(singlyLinkedList);
