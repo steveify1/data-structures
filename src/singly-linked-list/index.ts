@@ -84,11 +84,21 @@ export default class SinglyLinkedList {
         this.decrementLength();
         return valueOfRemovedNode;
     }
+
+    /**
+     * Adds a new node with a value at the start of the list
+     * 
+     * @param { any } value - A value to add at the start of the list
+     */
+     unshift<T>(value: T) {
+        const oldHead = this.head;
+        this.head = new Node<T>(value);
+        this.head.setNext(oldHead);
+    }
 }
 
 
 const singlyLinkedList = new SinglyLinkedList();
-
 
 singlyLinkedList.push('Hello');
 singlyLinkedList.push('Super');
@@ -117,5 +127,9 @@ console.log(singlyLinkedList);
 singlyLinkedList.push('Super');
 singlyLinkedList.push('Planet');
 console.log(singlyLinkedList);
-singlyLinkedList.shift();
+singlyLinkedList.unshift('Sweet');
+console.log(singlyLinkedList);
+singlyLinkedList.unshift('Hello');
+console.log(singlyLinkedList);
+singlyLinkedList.push('Earth');
 console.log(singlyLinkedList);
