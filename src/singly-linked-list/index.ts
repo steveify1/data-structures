@@ -181,6 +181,26 @@ export default class SinglyLinkedList {
 
         return true;
     }
+
+    /**
+     * Inserts a new node at a specified position in the list
+     * 
+     * @param { number } index - A number starting at zero
+     * @param { any } value - The value to set the node to.
+     */
+     remove<T>(index: number) {
+        if (index < 0 || index >= this.length) return false;
+        if (index === 0) return this.shift();
+        if (index === (this.length - 1)) return this.pop();
+
+        let previousNode = this.getNodeAt(index - 1);
+        let nodeAtIndex = previousNode.next;
+        let nextNode = nodeAtIndex.next;
+        previousNode.setNext(nextNode);
+        this.decrementLength();
+
+        return nodeAtIndex.value;
+    }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
@@ -203,4 +223,9 @@ console.log('=================================');
 singlyLinkedList.set(6, new Date());
 singlyLinkedList.set(7, new Date());
 singlyLinkedList.set(8, new Date());
+singlyLinkedList.forEach((node) => console.log(node.value));
+console.log('=================================');
+singlyLinkedList.remove(0);
+singlyLinkedList.remove(6);
+console.log(singlyLinkedList.remove(3))
 singlyLinkedList.forEach((node) => console.log(node.value));
