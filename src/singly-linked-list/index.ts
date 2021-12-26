@@ -201,6 +201,25 @@ export default class SinglyLinkedList {
 
         return nodeAtIndex.value;
     }
+
+    /**
+     * Reverses a singly linked list
+     */
+    reverse() {
+        let currentNode = this.head;
+        let previousNode = null;
+        let nextNode: Node | null;
+
+        for(let i = 1; i <= this.length; i++) {
+            nextNode = currentNode.next;
+            currentNode.setNext(previousNode);
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        this.head = previousNode;
+        this.tail = currentNode;
+    }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
@@ -211,21 +230,27 @@ singlyLinkedList.push('Sweet');
 singlyLinkedList.push('Planet');
 singlyLinkedList.push('Earth');
 
-singlyLinkedList.forEach((node) => console.log(node.value));
+// singlyLinkedList.forEach((node) => console.log(node.value));
+// console.log('=================================');
+// singlyLinkedList.insert(0, 'Precious');
+// singlyLinkedList.forEach((node) => console.log(node.value));
+// console.log('Length:', singlyLinkedList)
+// console.log('=================================');
+// singlyLinkedList.insert(9, [0, 1, 3]);
+// singlyLinkedList.forEach((node) => console.log(node.value));
+// console.log('=================================');
+// singlyLinkedList.set(6, new Date());
+// singlyLinkedList.set(7, new Date());
+// singlyLinkedList.set(8, new Date());
+// singlyLinkedList.forEach((node) => console.log(node.value));
+// console.log('=================================');
+// singlyLinkedList.remove(0);
+// singlyLinkedList.remove(6);
+// console.log(singlyLinkedList.remove(3))
+// singlyLinkedList.forEach((node) => console.log(node.value));
+
+
+singlyLinkedList.forEach((node) => console.log(node?.value));
 console.log('=================================');
-singlyLinkedList.insert(0, 'Precious');
-singlyLinkedList.forEach((node) => console.log(node.value));
-console.log('Length:', singlyLinkedList)
-console.log('=================================');
-singlyLinkedList.insert(9, [0, 1, 3]);
-singlyLinkedList.forEach((node) => console.log(node.value));
-console.log('=================================');
-singlyLinkedList.set(6, new Date());
-singlyLinkedList.set(7, new Date());
-singlyLinkedList.set(8, new Date());
-singlyLinkedList.forEach((node) => console.log(node.value));
-console.log('=================================');
-singlyLinkedList.remove(0);
-singlyLinkedList.remove(6);
-console.log(singlyLinkedList.remove(3))
-singlyLinkedList.forEach((node) => console.log(node.value));
+singlyLinkedList.reverse()
+singlyLinkedList.forEach((node) => console.log(node?.value));
