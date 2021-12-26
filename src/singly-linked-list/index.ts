@@ -249,8 +249,7 @@ singlyLinkedList.push('Earth');
 // console.log(singlyLinkedList.remove(3))
 // singlyLinkedList.forEach((node) => console.log(node.value));
 
-
-singlyLinkedList.forEach((node) => console.log(node?.value));
-console.log('=================================');
-singlyLinkedList.reverse()
-singlyLinkedList.forEach((node) => console.log(node?.value));
+// singlyLinkedList.forEach((node) => console.log(node?.value));
+// console.log('=================================');
+// singlyLinkedList.reverse()
+// singlyLinkedList.forEach((node) => console.log(node?.value));
