@@ -62,6 +62,23 @@ export default class DoublyLinkedList {
 
         this.incrementLength();
     }
+
+    /**
+     * Removes the last node from the end of the list
+     */
+    pop() {
+        const valueInPoppedNode = this.tail && this.tail.value;
+
+        if (this.length <= 1) {
+            this.head = this.tail = null;
+        } else {
+            this.tail = this.tail.previous;
+            this.tail.setNext(null);
+        }
+
+        this.decrementLength();
+        return valueInPoppedNode;
+    }
 }
 
 const doublyLinkedList = new DoublyLinkedList();
@@ -72,5 +89,11 @@ doublyLinkedList.push('Sweet');
 doublyLinkedList.push('Planet');
 doublyLinkedList.push('Earth');
 
-doublyLinkedList.forEach((node) => console.log(node));
+doublyLinkedList.forEach((node) => console.log(node.value));
+
+console.log('=================================');
+doublyLinkedList.pop();
+doublyLinkedList.pop();
+doublyLinkedList.pop();
+doublyLinkedList.forEach((node) => console.log(node?.value));
 
