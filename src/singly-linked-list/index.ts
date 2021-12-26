@@ -10,6 +10,10 @@ class Node<T=any> {
     setNext(node: Node) {
         this.next = node;
     }
+
+    setValue(value: T) {
+        this.value = value;
+    }
 } 
 
 export default class SinglyLinkedList {
@@ -95,6 +99,38 @@ export default class SinglyLinkedList {
         this.head = new Node<T>(value);
         this.head.setNext(oldHead);
     }
+
+    private getNodeAt(index: number): Node | null {
+        if (index < 0 || index >= this.length) return null;
+
+        let counter = 0;
+        let currentNode = this.head;
+
+        while(counter < this.length) {
+            if (counter == index) break;
+            currentNode = currentNode.next;
+            counter++;
+        }
+
+        return currentNode;
+    }
+
+    /**
+     * Returns the value of a node at a given position in a list. Returns null
+     * if no node is found at the specified position.
+     * 
+     * @param { number } index - A number starting at zero
+     */
+    get(index: number): Node | null {
+        const node = this.getNodeAt(index);
+        return node && node.value;
+    }
+
+    set<T>(index: number, value: T) {
+        const node = this.getNodeAt(index);
+        if (!node) throw Error(`No Node At Position: ${index}`);
+        node.setValue(value);
+    }
 }
 
 
@@ -106,30 +142,8 @@ singlyLinkedList.push('Sweet');
 singlyLinkedList.push('Planet');
 singlyLinkedList.push('Earth');
 
+console.log(singlyLinkedList.get(2));
+singlyLinkedList.set(2, 'Precious')
+console.log(singlyLinkedList.get(2));
 console.log(singlyLinkedList);
 
-singlyLinkedList.shift();
-console.log(singlyLinkedList);
-
-
-singlyLinkedList.shift();
-console.log(singlyLinkedList);
-
-singlyLinkedList.shift();
-console.log(singlyLinkedList);
-
-singlyLinkedList.shift();
-console.log(singlyLinkedList);
-
-singlyLinkedList.shift();
-console.log(singlyLinkedList);
-
-singlyLinkedList.push('Super');
-singlyLinkedList.push('Planet');
-console.log(singlyLinkedList);
-singlyLinkedList.unshift('Sweet');
-console.log(singlyLinkedList);
-singlyLinkedList.unshift('Hello');
-console.log(singlyLinkedList);
-singlyLinkedList.push('Earth');
-console.log(singlyLinkedList);
