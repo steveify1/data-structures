@@ -29,6 +29,17 @@ export default class SinglyLinkedList {
         this.length--;
     }
 
+    forEach(cb: (n: Node) => any) {
+        let i = 1;
+        let currentNode = this.head;
+
+        while(i <= this.length) {
+            cb(currentNode);
+            currentNode = currentNode.next;
+            i++;
+        }
+    }
+
     /**
      * Adds a new node with a value at the end of the list
      * 
@@ -95,9 +106,14 @@ export default class SinglyLinkedList {
      * @param { any } value - A value to add at the start of the list
      */
      unshift<T>(value: T) {
-        const oldHead = this.head;
-        this.head = new Node<T>(value);
-        this.head.setNext(oldHead);
+        if (!this.length) {
+            this.push(value);
+        } else {
+            const oldHead = this.head;
+            this.head = new Node<T>(value);
+            this.head.setNext(oldHead);
+            this.incrementLength();
+        }
     }
 
     private getNodeAt(index: number): Node | null {
@@ -114,6 +130,7 @@ export default class SinglyLinkedList {
 
         return currentNode;
     }
+    
 
     /**
      * Returns the value of a node at a given position in a list. Returns null
@@ -126,13 +143,45 @@ export default class SinglyLinkedList {
         return node && node.value;
     }
 
+    /**
+     * Updates the value of a node at a given position in a list.
+     * 
+     * @param { number } index - A number starting at zero
+     * @param { any } value - The value to set the node to.
+     */
     set<T>(index: number, value: T) {
         const node = this.getNodeAt(index);
         if (!node) throw Error(`No Node At Position: ${index}`);
         node.setValue(value);
     }
-}
 
+    /**
+     * Inserts a new node at a specified position in the list
+     * 
+     * @param { number } index - A number starting at zero
+     * @param { any } value - The value to set the node to.
+     */
+    insert<T>(index: number, value: T) {
+        if (index < 0) return false;
+
+        if (index === 0) {
+            this.unshift(value);
+        } else if (index >= this.length) {
+            while(this.length - 1 < index) {
+                this.push(this.length == index ? value : null);
+            }
+        } else {
+            const newNode = new Node<T>(value);
+            let previousNode = this.getNodeAt(index - 1);
+            let currentNodeAtIndex = previousNode.next;
+            previousNode.setNext(newNode);
+            newNode.setNext(currentNodeAtIndex); 
+            this.incrementLength();
+        }
+
+        return true;
+    }
+}
 
 const singlyLinkedList = new SinglyLinkedList();
 
@@ -142,8 +191,16 @@ singlyLinkedList.push('Sweet');
 singlyLinkedList.push('Planet');
 singlyLinkedList.push('Earth');
 
-console.log(singlyLinkedList.get(2));
-singlyLinkedList.set(2, 'Precious')
-console.log(singlyLinkedList.get(2));
-console.log(singlyLinkedList);
-
+singlyLinkedList.forEach((node) => console.log(node.value));
+console.log('=================================');
+singlyLinkedList.insert(0, 'Precious');
+singlyLinkedList.forEach((node) => console.log(node.value));
+console.log('Length:', singlyLinkedList)
+console.log('=================================');
+singlyLinkedList.insert(9, [0, 1, 3]);
+singlyLinkedList.forEach((node) => console.log(node.value));
+console.log('=================================');
+singlyLinkedList.set(6, new Date());
+singlyLinkedList.set(7, new Date());
+singlyLinkedList.set(8, new Date());
+singlyLinkedList.forEach((node) => console.log(node.value));
