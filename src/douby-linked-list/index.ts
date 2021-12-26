@@ -98,16 +98,36 @@ export default class DoublyLinkedList {
         this.decrementLength();
         return valueOfOldHead;
     }
+
+    /**
+     * Adds a new node with a value at the end of the list
+     * 
+     * @param { any } value - A value to add at the end of the list
+     */
+    unshift<T>(value: T) {
+        const node = new Node<T>(value);
+
+        if (!this.head) {
+            this.head = this.tail = node;
+        } else {
+            this.head.setPrevious(node);
+            node.setNext(this.head);
+            this.head = node;
+        }
+
+        this.incrementLength();
+    }
+    
 }
 
 const doublyLinkedList = new DoublyLinkedList();
 
-doublyLinkedList.push('Hello');
-doublyLinkedList.push('Super');
 
 doublyLinkedList.forEach((node) => console.log(node.value));
 
 console.log('=================================');
 doublyLinkedList.shift();
+doublyLinkedList.unshift('Steve');
+doublyLinkedList.unshift('Time');
 doublyLinkedList.forEach((node) => console.log(node?.value));
 
