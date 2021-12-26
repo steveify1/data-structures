@@ -79,21 +79,35 @@ export default class DoublyLinkedList {
         this.decrementLength();
         return valueInPoppedNode;
     }
+
+    /**
+     * Removes a node from the beginning of the list
+     */
+    shift() {
+        if (!this.length) return null;
+
+        let valueOfOldHead = this.head.value;
+
+        if (this.length === 1) {
+            this.head = this.tail = null;
+        } else {
+            this.head = this.head.next;
+            this.head.setPrevious(null);
+        }
+
+        this.decrementLength();
+        return valueOfOldHead;
+    }
 }
 
 const doublyLinkedList = new DoublyLinkedList();
 
 doublyLinkedList.push('Hello');
 doublyLinkedList.push('Super');
-doublyLinkedList.push('Sweet');
-doublyLinkedList.push('Planet');
-doublyLinkedList.push('Earth');
 
 doublyLinkedList.forEach((node) => console.log(node.value));
 
 console.log('=================================');
-doublyLinkedList.pop();
-doublyLinkedList.pop();
-doublyLinkedList.pop();
+doublyLinkedList.shift();
 doublyLinkedList.forEach((node) => console.log(node?.value));
 
