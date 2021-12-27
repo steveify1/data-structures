@@ -124,15 +124,14 @@ export default class DoublyLinkedList {
         if (index === this.length - 1) return this.tail;
 
         const midPoint = (this.length - 1) / 2;
-        const isIndexLowerThanMidPoint = index < midPoint;
+        const isIndexLowerThanMidPoint = index <= midPoint;
         let currentNode = isIndexLowerThanMidPoint ? this.head : this.tail;
         let counter;
 
         if (isIndexLowerThanMidPoint) {
             counter = 0;
 
-            while (counter <= midPoint) {
-                if (counter === index) break;
+            while (counter !== index) {
                 currentNode = currentNode.next;
                 counter++;
             }
@@ -140,8 +139,7 @@ export default class DoublyLinkedList {
         } else {
             counter = this.length - 1;
 
-            while (counter >= midPoint) {
-                if (counter === index) break;
+            while (counter !== index) {
                 currentNode = currentNode.previous;
                 counter--;
             }
@@ -186,18 +184,39 @@ export default class DoublyLinkedList {
 
 
         const newNode = new Node(value);
-        const nodeAtIndex = this.getNodeAt(index);
-        nodeAtIndex.previous.setNext(newNode);
+        const nodeBeforeIndex = this.getNodeAt(index - 1);
+        const nodeAtIndex = nodeBeforeIndex.next;
+
+        nodeBeforeIndex.setNext(newNode);
         nodeAtIndex.setPrevious(newNode);
-        newNode.setPrevious(nodeAtIndex.previous);
+        newNode.setPrevious(nodeBeforeIndex);
         newNode.setNext(nodeAtIndex);
+
         this.incrementLength();
+        return true;
+    }
+
+    /**
+     * Removes a node from a specific position
+     * 
+     * @param { number } index - A specific position
+     */
+    remove(index: number) {
+        if (index < 0 || index >= this.length) return false;
+        if (index === 0) return this.shift();
+        if (index === this.length - 1) return this.pop();
+
+        const nodeAtIndex = this.getNodeAt(index);
+        nodeAtIndex.previous.setNext(nodeAtIndex.next);
+        nodeAtIndex.next.setPrevious(nodeAtIndex.previous);
+        nodeAtIndex.setPrevious(null);
+        nodeAtIndex.setNext(null);
+        this.decrementLength();
         return true;
     }
 }
 
 const doublyLinkedList = new DoublyLinkedList();
-
 
 doublyLinkedList.forEach((node) => console.log(node.value));
 
@@ -211,5 +230,11 @@ doublyLinkedList.push('Okon Precious');
 doublyLinkedList.forEach((node) => console.log(node?.value));
 
 console.log('=================================');
-doublyLinkedList.insert(6, 'Baba nla');
+doublyLinkedList.insert(6, 'Odogwu');
+doublyLinkedList.forEach((node) => console.log(node?.value));
+console.log('=================================');
+doublyLinkedList.remove(4);
+doublyLinkedList.forEach((node) => console.log(node?.value));
+console.log('=================================');
+doublyLinkedList.remove(0);
 doublyLinkedList.forEach((node) => console.log(node?.value));
