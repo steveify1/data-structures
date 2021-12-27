@@ -117,7 +117,62 @@ export default class DoublyLinkedList {
 
         this.incrementLength();
     }
+
+    getNodeAt(index: number): Node | null {
+        if (index < 0 || index >= this.length) return null;
+        if (index === 0) return this.head;
+        if (index === this.length - 1) return this.tail;
+
+        const midPoint = (this.length - 1) / 2;
+        const isIndexLowerThanMidPoint = index < midPoint;
+        let currentNode = isIndexLowerThanMidPoint ? this.head : this.tail;
+        let counter;
+
+        if (isIndexLowerThanMidPoint) {
+            counter = 0;
+
+            while (counter <= midPoint) {
+                if (counter === index) break;
+                currentNode = currentNode.next;
+                counter++;
+            }
+
+        } else {
+            counter = this.length - 1;
+
+            while (counter >= midPoint) {
+                if (counter === index) break;
+                currentNode = currentNode.previous;
+                counter--;
+            }
+        }
+
+        return currentNode;
+    }
     
+    /**
+     * Returns the value of a node at a specified index (position)
+     * 
+     * @param { number } index - A specific position
+     */
+    get(index: number) {
+        const node = this.getNodeAt(index);
+        return node && node.value;
+    }
+
+    /**
+     * Updates the value of a node at a given position
+     * 
+     * @param { number } index - A specific position
+     * @param { any } value - A new value for the node
+     */
+    set(index: number, value: any) {
+        const node = this.getNodeAt(index);
+        if (!node) return false;
+        node.setValue(value);
+        return true;
+    }
+
 }
 
 const doublyLinkedList = new DoublyLinkedList();
@@ -125,9 +180,19 @@ const doublyLinkedList = new DoublyLinkedList();
 
 doublyLinkedList.forEach((node) => console.log(node.value));
 
-console.log('=================================');
-doublyLinkedList.shift();
-doublyLinkedList.unshift('Steve');
-doublyLinkedList.unshift('Time');
+doublyLinkedList.push('Steve');
+doublyLinkedList.push('Time');
+doublyLinkedList.push(new Date());
+doublyLinkedList.push('Money');
+doublyLinkedList.push(12);
+doublyLinkedList.push([2, 55, 9]);
+doublyLinkedList.push('Okon Precious');
 doublyLinkedList.forEach((node) => console.log(node?.value));
 
+console.log('=================================');
+console.log(doublyLinkedList.get(1));
+
+
+console.log('=================================');
+doublyLinkedList.set(0, 'Baba nla');
+doublyLinkedList.forEach((node) => console.log(node?.value));
