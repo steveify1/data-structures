@@ -218,8 +218,6 @@ export default class DoublyLinkedList {
 
 const doublyLinkedList = new DoublyLinkedList();
 
-doublyLinkedList.forEach((node) => console.log(node.value));
-
 doublyLinkedList.push('Steve');
 doublyLinkedList.push('Time');
 doublyLinkedList.push(new Date());
@@ -227,14 +225,14 @@ doublyLinkedList.push('Money');
 doublyLinkedList.push(12);
 doublyLinkedList.push([2, 55, 9]);
 doublyLinkedList.push('Okon Precious');
-doublyLinkedList.forEach((node) => console.log(node?.value));
+// doublyLinkedList.forEach((node) => console.log(node?.value));
 
-console.log('=================================');
-doublyLinkedList.insert(6, 'Odogwu');
-doublyLinkedList.forEach((node) => console.log(node?.value));
-console.log('=================================');
-doublyLinkedList.remove(4);
-doublyLinkedList.forEach((node) => console.log(node?.value));
-console.log('=================================');
-doublyLinkedList.remove(0);
-doublyLinkedList.forEach((node) => console.log(node?.value));
+// console.log('=================================');
+// doublyLinkedList.insert(6, 'Odogwu');
+// doublyLinkedList.forEach((node) => console.log(node?.value));
+// console.log('=================================');
+// doublyLinkedList.remove(4);
+// doublyLinkedList.forEach((node) => console.log(node?.value));
+// console.log('=================================');
+// doublyLinkedList.remove(0);
+// doublyLinkedList.forEach((node) => console.log(node?.value));
