@@ -173,6 +173,27 @@ export default class DoublyLinkedList {
         return true;
     }
 
+    /**
+     * Inserts a new node at a specific position
+     * 
+     * @param { number } index - A specific position
+     * @param { any } value - A new value for the node
+     */
+    insert(index: number, value: any) {
+        if (index < 0 || index > this.length) return false;
+        if (index === 0) return this.unshift(value);
+        if (index === this.length) return this.push(value);
+
+
+        const newNode = new Node(value);
+        const nodeAtIndex = this.getNodeAt(index);
+        nodeAtIndex.previous.setNext(newNode);
+        nodeAtIndex.setPrevious(newNode);
+        newNode.setPrevious(nodeAtIndex.previous);
+        newNode.setNext(nodeAtIndex);
+        this.incrementLength();
+        return true;
+    }
 }
 
 const doublyLinkedList = new DoublyLinkedList();
@@ -190,9 +211,5 @@ doublyLinkedList.push('Okon Precious');
 doublyLinkedList.forEach((node) => console.log(node?.value));
 
 console.log('=================================');
-console.log(doublyLinkedList.get(1));
-
-
-console.log('=================================');
-doublyLinkedList.set(0, 'Baba nla');
+doublyLinkedList.insert(6, 'Baba nla');
 doublyLinkedList.forEach((node) => console.log(node?.value));
