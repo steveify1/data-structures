@@ -1,6 +1,6 @@
 import Node from './node';
 
-export default class Stack {
+export default class Queue {
     private first: Node | null = null;
     private last: Node | null = null;
     public length = 0;
@@ -11,8 +11,8 @@ export default class Stack {
         if (!this.first) {
             this.first = this.last = node;
         } else {
-            node.setNext(this.first);
-            this.first = node;
+            this.last.setNext(node);
+            this.last = node;
         }
 
         this.length++;
@@ -21,7 +21,7 @@ export default class Stack {
 
     pop() {
         if (!this.length) return null;
-        const poppedNode = this.first;
+        let poppedNode = this.first;;
 
         if (this.length === 1) {
             this.first = this.last = null;
@@ -34,20 +34,21 @@ export default class Stack {
     }
 }
 
-const stack = new Stack();
-stack.push('Steve');
-stack.push('Ify');
-// console.log(stack);
+const queue = new Queue();
+queue.push('Steve');
+queue.push('Ify');
+queue.push('Odogwu');
+queue.push('Bayce');
+console.log(queue);
 
-// console.log('======================')
-// stack.push('Odogwu');
-// console.log(stack);
-// console.log('======================')
-// console.log(stack.pop());
-// console.log(stack);
-// console.log('======================')
-// console.log(stack.pop());
-// console.log(stack);
-// console.log('======================')
-// console.log(stack.pop());
-// console.log(stack);
+
+console.log('======================')
+console.log(queue.pop());
+console.log(queue);
+console.log('======================')
+console.log(queue.pop());
+console.log(queue);
+console.log('======================')
+console.log(queue.pop());
+console.log(queue);
+
