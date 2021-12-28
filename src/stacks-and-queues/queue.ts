@@ -39,16 +39,16 @@ queue.push('Steve');
 queue.push('Ify');
 queue.push('Odogwu');
 queue.push('Bayce');
-console.log(queue);
+// console.log(queue);
 
 
-console.log('======================')
-console.log(queue.pop());
-console.log(queue);
-console.log('======================')
-console.log(queue.pop());
-console.log(queue);
-console.log('======================')
-console.log(queue.pop());
-console.log(queue);
+// console.log('======================')
+// console.log(queue.pop());
+// console.log(queue);
+// console.log('======================')
+// console.log(queue.pop());
+// console.log(queue);
+// console.log('======================')
+// console.log(queue.pop());
+// console.log(queue);
 
