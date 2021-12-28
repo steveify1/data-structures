@@ -19,7 +19,6 @@ class Node {
 export default class BST {
     public root: Node | null = null;
 
-
     insert(value: any) {
         const newNode = new Node(value);
 
@@ -33,21 +32,52 @@ export default class BST {
                     if (!currentNode.left) {
                         currentNode.setLeftNode(newNode);
                         break;
-                    } else {
-                        currentNode = currentNode.left;
                     }
+
+                    currentNode = currentNode.left;
                 } else {
                     if (!currentNode.right) {
                         currentNode.setRightNode(newNode);
                         break;
-                    } else {
-                        currentNode = currentNode.right;
                     }
+
+                    currentNode = currentNode.right;
                 }
             }
         }
 
         return this;
+    }
+
+    /**
+     * Searches for a node with a value. Returns the first node with the value.
+     * Returns null if no node with the specified value is found.
+     * 
+     * @param { any } value - The value of a node
+     */
+    search(value: any) {
+        let currentNode = this.root;
+        if (!currentNode || currentNode.value === value) return currentNode;
+
+        while(currentNode) {
+            if (value < currentNode.value) {
+                if (!currentNode.left || currentNode.left.value === value) {
+                    currentNode = currentNode.left;
+                    break;
+                }
+                
+                currentNode = currentNode.left;
+            } else {
+                if (!currentNode.right || currentNode.right.value === value) {
+                    currentNode = currentNode.right;
+                    break;
+                }
+                
+                currentNode = currentNode.right;
+            }
+        }
+
+        return currentNode;
     }
 }
 
@@ -70,3 +100,7 @@ console.log(bst);
 console.log('======================');
 bst.insert(2);
 console.log(bst.root);
+
+console.log('======================');
+console.log(bst.search(40));
+
