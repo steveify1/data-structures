@@ -83,24 +83,24 @@ export default class BST {
 
 const bst = new BST();
 
-console.log(bst);
+// console.log(bst);
 
-console.log('======================');
-bst.insert(3);
-console.log(bst);
-console.log('======================');
-bst.insert(6);
-console.log(bst);
-console.log('======================');
-bst.insert(5);
-console.log(bst);
-console.log('======================');
-bst.insert(7);
-console.log(bst);
-console.log('======================');
-bst.insert(2);
-console.log(bst.root);
+// console.log('======================');
+// bst.insert(3);
+// console.log(bst);
+// console.log('======================');
+// bst.insert(6);
+// console.log(bst);
+// console.log('======================');
+// bst.insert(5);
+// console.log(bst);
+// console.log('======================');
+// bst.insert(7);
+// console.log(bst);
+// console.log('======================');
+// bst.insert(2);
+// console.log(bst.root);
 
-console.log('======================');
-console.log(bst.search(40));
+// console.log('======================');
+// console.log(bst.search(40));
 
