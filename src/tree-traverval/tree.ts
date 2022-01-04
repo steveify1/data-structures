@@ -57,9 +57,7 @@ export class BinarySearchTree {
         queue.push(this.root);
 
         while(queue.length) {
-            console.log(queue.length);
             const { value: treeNode } =  queue.shift();
-            console.log({ treeNode })
 
             if (treeNode.left) {
                 queue.push(treeNode.left);
@@ -74,6 +72,58 @@ export class BinarySearchTree {
 
         return values;
     }
+
+    /**
+     * Implements depth-first pre-order tree traversal algorithm
+     */
+     dfsPreOrderTraverse() {
+        const values = [];
+        
+        if (!this.length) return values;
+
+        let currentNode = this.root;
+
+        function traverse(node: TreeNode) {
+            if (node.left) {
+                traverse(node.left);
+            }
+
+            if (node.right) {
+                traverse(node.right);
+            }
+
+            values.push(node.value);
+        }
+
+        traverse(currentNode);       
+        return values;
+    }
+
+    /**
+     * Implements depth-first post-order tree traversal algorithm
+     */
+     dfsPostOrderTraverse() {
+        const values = [];
+        
+        if (!this.length) return values;
+
+        let currentNode = this.root;
+
+        function traverse(node: TreeNode) {
+            values.push(node.value);
+
+            if (node.left) {
+                traverse(node.left);
+            }
+
+            if (node.right) {
+                traverse(node.right);
+            }
+        }
+
+        traverse(currentNode);       
+        return values;
+    }
 }
 
 const BST = new BinarySearchTree();
@@ -86,6 +136,9 @@ BST.insert(5);
 BST.insert(6);
 BST.insert(9);
 BST.insert(4);
-console.log(BST);
 
-console.log(BST.bfsTraverse())
+
+console.log(BST.bfsTraverse());
+console.log(BST.dfsPreOrderTraverse());
+console.log(BST.dfsPostOrderTraverse());
+console.log('Done');
