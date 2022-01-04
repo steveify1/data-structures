@@ -124,6 +124,30 @@ export class BinarySearchTree {
         traverse(currentNode);       
         return values;
     }
+
+    /**
+     * Implements depth-first in-order tree traversal algorithm
+     */
+     dfsInOrderTraverse() {
+        const values = [];
+        
+        if (!this.length) return values;
+
+        function traverse(node: TreeNode) {
+            if (node.left) {
+                traverse(node.left);
+            }
+
+            values.push(node.value);
+
+            if (node.right) {
+                traverse(node.right);
+            }
+        }
+
+        traverse(this.root);       
+        return values;
+    }
 }
 
 const BST = new BinarySearchTree();
@@ -141,4 +165,5 @@ BST.insert(4);
 console.log(BST.bfsTraverse());
 console.log(BST.dfsPreOrderTraverse());
 console.log(BST.dfsPostOrderTraverse());
+console.log(BST.dfsInOrderTraverse());
 console.log('Done');
